@@ -2,12 +2,107 @@
 <html>
 <head>
     <title>SIP Calculator</title>
-
-    <!-- IMPORTANT for Mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #4e73df;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2e59d9;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .result-box {
+            background: #f8f9fc;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .result-box p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .result-box span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .total {
+            background: #1cc88a;
+            color: white;
+        }
+
+        .total p,
+        .total span {
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -48,6 +143,34 @@
     </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+function calculateSIP() {
+
+    let P = parseFloat(document.getElementById("monthlyInvestment").value);
+    let annualRate = parseFloat(document.getElementById("annualRate").value);
+    let years = parseFloat(document.getElementById("years").value);
+
+    if (!P || !annualRate || !years) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let r = annualRate / 12 / 100;
+    let n = years * 12;
+
+    let M = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+
+    let investedAmount = P * n;
+    let estimatedReturns = M - investedAmount;
+
+    document.getElementById("investedAmount").innerText = investedAmount.toFixed(2);
+    document.getElementById("estimatedReturns").innerText = estimatedReturns.toFixed(2);
+    document.getElementById("totalValue").innerText = M.toFixed(2);
+}
+</script>
+
+<!-- Your Ad Script Added Here -->
+<script src="https://pl28832824.effectivegatecpm.com/c6/b8/f8/c6b8f80664d09cdf08ffda64e5c743c2.js"></script>
+
 </body>
 </html>
